@@ -1,18 +1,37 @@
 <template>
-  <button class="button-styled">
+  <button :class="['button-styled', color]">
     {{ text }}
+    {{ user }}
     <span>Teste de Sistema</span>
   </button>
 </template>
 
 <script lang="ts">
-/* eslint-disable */
-import { defineComponent } from "vue"
+import { defineComponent, PropType } from "vue"
+
+type color = "success" | "primary" | "danger"
+
+interface User {
+  id: number
+  nome: string
+}
+
 export default defineComponent({
   props: {
     text: {
       type: String,
-      default: "Botão",
+      default: "Texto padrão",
+    },
+    color: {
+      type: String,
+      default: "primary",
+      validator: (value: color) => {
+        return ["primary", "danger", "success"].includes(value)
+      },
+    },
+    user: {
+      type: Object as PropType<User>,
+      require: true,
     },
   },
 })
@@ -29,5 +48,15 @@ export default defineComponent({
   display: block;
   margin-bottom: 1rem;
   background-color: #2d6cea;
+}
+
+.success {
+  background: green;
+}
+.primary {
+  background: #2d6cea;
+}
+.danger {
+  background: red;
 }
 </style>

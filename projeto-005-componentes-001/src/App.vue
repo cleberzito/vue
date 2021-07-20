@@ -1,17 +1,24 @@
 <template>
-  <ButtonStyled text="Cadastro" />
-  <ButtonStyled text="Login" />
-  <ButtonStyled />
+  <ButtonStyled text="Cadastro" color="danger" :user="user" />
+  <ButtonStyled text="Login" color="success" :user="user" />
+  <ButtonStyled :user="user" />
 </template>
 
 <script lang="ts">
-/* eslint-disable */
 import { defineComponent } from "vue"
 import ButtonStyled from "@/components/ButtonStyled.vue"
 
 export default defineComponent({
   components: {
     ButtonStyled,
+  },
+  data() {
+    return {
+      user: {
+        id: 1,
+        name: "cleber",
+      },
+    }
   },
 })
 </script>
